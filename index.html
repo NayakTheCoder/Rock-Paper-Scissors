@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        *{
+   
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+  
+}
+#qw{
+   text-align: center;
+}
+
+h1{
+   background-color: white;
+   padding: 20px;
+   
+}
+.score-board{
+   margin: 20px auto;
+   border: 3px solid white;
+   width: 200px;
+   color: white;
+   font-size: 40px;
+   border-radius: 4px;
+   text-align: center;
+   padding: 15px 10px;
+   font-family: cursive;
+   position: relative;
+}
+.badge{
+   background: #E2584D;
+   font-size: 15px;
+   padding: 2px 10px;
+}
+
+#user{
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+#comp{
+position: absolute;
+ right: 0;
+ top: 0;
+}
+.result{
+   font-size: 40px;
+   color: white;
+   text-align: center;
+}
+
+.choice{
+   border: 5px solid black;
+   margin: 50px;
+   padding: 1px;
+   display: inline-block;
+}
+
+.choices{
+   text-align: center;
+}
+
+#make-move{
+   color: white;
+   text-align: center;
+   font-size: 35px;
+   font-weight: bold;
+}
+.choice:hover{
+   cursor: grab;
+   background-color: red;
+}
+
+
+    </style>
+</head>
+<header><h1 id="qw">Rock Paper Scissors</h1></header>
+<body style="background-color: #24272e;">
+    <div class="score-board">
+    <div id="user" class="badge">User</div>
+    <div id="comp" class="badge">Comp</div>
+    <span id="user-score">0</span>:<span id="computer-score">0</span>
+
+    </div>
+    <div class="result">
+        <p style="font-family: cursive;">Start the Game !</p>
+    </div>
+
+    <div class="choices">
+        <div class="choice" id="p">
+         <img src="img_paper.jpg" alt="">
+         <p>paper</p>
+        </div>
+        <div id="r" class="choice">
+            <img src="img_rock.jpg" alt="">
+            <p>Rock</p>
+        </div>
+        <div id="s" class="choice">
+            <img src="img_scisoors.jpg" alt="">
+            <p>Scissors</p>
+        </div>
+    </div>
+    <p id="make-move">Make your move !</p>
+</body>
+<script>
+    // declaring variables and getting elements from HTML source to my javascript 
+let userscore = 0;
+let computerscore = 0;
+let user_score = document.getElementById("user-score");
+let computer_score = document.getElementById("computer-score");
+let scoreboard = document.querySelector(".score-board");
+let result = document.querySelector(".result");
+let paper = document.getElementById("p");
+let rock = document.getElementById("r");
+let sci = document.getElementById("s");
+
+// creating functions
+
+function win(){
+    userscore++;
+    user_score.innerText = userscore;
+    result.innerHTML = "User wins !";
+}
+function lose(){
+computerscore++;
+computer_score.innerText = computerscore;
+result.innerHTML = "Computer Wins !";
+}
+function draw(){
+ result.innerHTML = "It's a draw !";
+}
+function computerChoice(){
+    const choices = ["r","p","s"];  
+    const randomNum = Math.floor(Math.random()*3);
+    return choices[randomNum];
+}
+function game(userChoice){
+   const computerchoice = computerChoice();
+  switch(userChoice+computerchoice){
+      case "rs":
+      case "pr":
+      case "sp":
+          win();
+      console.log("USERWINS");        
+      break;
+      case "rp":
+      case "sr":
+      case "ps":
+          lose();
+      console.log("COMPUTERWINS");
+      break;   
+      case "rr":
+        case "pp":
+        case "ss":
+            draw();
+            console.log("IT'S A TIE !!!");
+            break;
+  }
+}
+
+
+function main(){
+rock.addEventListener("click", function (){
+  game("r");
+});
+
+paper.addEventListener("click", function(){
+   game("p");
+});
+
+sci.addEventListener("click", function(){
+  game("s");
+});
+
+}
+main();
+
+</script>
+</html>
